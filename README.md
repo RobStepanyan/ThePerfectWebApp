@@ -11,7 +11,7 @@ Example of a perfect web app.
 * Django
 * PostgreSQL
 * Rest API
-* Redis
+* Redis (maybe:smile:)
 
 ### Other
 * Docker: Docker-Compose
