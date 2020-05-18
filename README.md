@@ -16,30 +16,30 @@ Example of a perfect web app.
 ### Other
 * Docker: Docker-Compose
 
-## Testing
+### Testing
 * Django tests
 
-# What's in app
+## What's in app?
 [The idea is found in a random blog.](https://blog.bitsrc.io/15-app-ideas-to-build-and-level-up-your-coding-skills-28612c72a3b1)
 
 Below You can find information about current project, and a guide if you want to repeat this app by yourself.
 
-## GitHub Timeline
+### GitHub Timeline
 API’s and graphical representation of information are hallmarks of modern web applications. GitHub Timeline combines the two to create a visual history of a users GitHub activity.
 
 The goal of GitHub Timeline is accept a GitHub user name and produce a timeline containing each repo and annotated with the repo names, the date they were created, and their descriptions. The timeline should be one that could be shared with a prospective employer. It should be easy to read and make effective use of color and typography.
 
 Only public GitHub repos should be displayed.
 
-### User Stories
+#### User Stories
 * User can enter a GitHub user name
 * User can click a ‘Generate’ button to create and display the named users repo timeline
 * User can see a warning message if the GitHub user name is not a valid GitHub user name.
 
-### Bonus Features
+#### Bonus Features
 * User can see a summary of the number of repos tallied by the year they were created
 
-### Useful links and resources
+#### Useful links and resources
 GitHub offers two API’s you may use to access repo data. You may also choose to use an NPM package to access the GitHub API.
 
 Documentation for the GitHub API can be found at:
