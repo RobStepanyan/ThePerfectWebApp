@@ -10,7 +10,8 @@ class MainContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            results: [], 
+            results: [<EmptyResults text="Will appear here"/>],
+            emptyResult: true, 
             last_updated: null,
             getUpdateButtonText: 'Get Data!',
             getUpdateButtonFirstInput: true,
@@ -32,7 +33,9 @@ class MainContainer extends React.Component {
 
             axios.get(`http://localhost:8000/repos/${username}`)
             .then(response => {
-                this.setState({getUpdateButtonText: 'Update Data!', getUpdateButtonFirstInput:false, results:[]});
+                this.setState({getUpdateButtonText: 'Update Data!', getUpdateButtonFirstInput:false, results:[], emptyResult: false});
+                // Sorting API response by date
+                response['data'] = response['data'].sort((a, b) => (new Date(a['created_at']) > new Date(b['created_at'])) ? 1 : -1);
                 response['data'].forEach(e => {
                     let full_name = e['full_name'].split('/')
                     this.setState({
@@ -42,8 +45,8 @@ class MainContainer extends React.Component {
                     })
                 });
             })
-            .catch(response => {
-                this.setState({results: [<EmptyResults/>]})
+            .catch(() => {
+                this.setState({results: [<EmptyResults text="Wrong username"/>], emptyResult:true})
             })
         }
     }
@@ -81,9 +84,16 @@ class MainContainer extends React.Component {
                         <hr/>
                         <div className="row justify-content-center">
                             <div className="col-lg-10" id="result">
+                                {!this.state.emptyResult &&
                                 <ul className="timeline">
                                     {this.state.results}
                                 </ul>
+                                }
+                                {this.state.emptyResult &&
+                                    <div>
+                                    {this.state.results}
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -103,9 +113,9 @@ function ResultRepo(props){
     )
 }
 
-function EmptyResults(){
+function EmptyResults(props){
     return(
-        <h3>No data found</h3>
+        <h3 className="text-center font-weight-bold text-black-50">{props.text}</h3>
     )
 }
 
