@@ -93,7 +93,7 @@ body {
 .timeline .event:after {
     position: absolute;
     display: block;
-    top: 0;
+    top: 10px;
 }
 .timeline .event:before {
     left: -217.5px;
@@ -102,16 +102,25 @@ body {
     text-align: right;
     font-size: 1rem;
     min-width: 120px;
-    font-family: "Saira", sans-serif;
+}
+@media (max-width: 768px) {
+    .timeline {
+        margin-left: 0;
+    }
+    .timeline .event:before {
+        left: 0;
+        top: -20px;
+        opacity: .5;
+    }
 }
 .timeline .event:after {
     box-shadow: 0 0 0 4px var(--primary);
     left: -57.85px;
-    background: #1C1C1C;
+    background: white;
     border-radius: 50%;
     height: 11px;
     width: 11px;
     content: "";
-    top: 5px;
+    top: 15px;
 }
 /* End of Timeline */
