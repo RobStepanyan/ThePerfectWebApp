@@ -130,7 +130,7 @@ class LightDarkButton extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            isClicked: false,
+            isClicked: (localStorage.getItem('data-theme')==='dark') ? true : false,
         }
         this.handleClick = this.handleClick.bind(this)
     }
@@ -139,8 +139,17 @@ class LightDarkButton extends React.Component {
         if (this.state['isClicked']) {
             this.setState({isClicked: false})
             $('body').attr('data-theme', 'light')
+            localStorage.setItem('data-theme', 'light')
         } else {
             this.setState({isClicked: true})
+            $('body').attr('data-theme', 'dark')
+            localStorage.setItem('data-theme', 'dark')
+        }
+    }
+
+    componentDidMount() {
+        if (this.state.isClicked && !$('.switch-wrap input').attr('checked')) {
+            $('.switch-wrap input').attr('checked', 'checked')
             $('body').attr('data-theme', 'dark')
         }
     }
