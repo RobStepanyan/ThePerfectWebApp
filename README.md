@@ -17,7 +17,10 @@ Example of a perfect web app.
 * Docker: Docker-Compose
 
 ## How to run this app
-* Download Docker
+* Make Sure to have installed
+>1. Docker
+>2. Python
+>3. Node JS (for npm)
 * Clone this Repository
 ```bash
 cd <this_repo_name>/Container
