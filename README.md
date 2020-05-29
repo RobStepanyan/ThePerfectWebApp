@@ -11,13 +11,21 @@ Example of a perfect web app.
 * Django
 * PostgreSQL
 * Rest API
-* Redis (maybe:smile:)
+* Redis (Soon Maybe:smile:)
 
 ### Other
 * Docker: Docker-Compose
 
-### Testing
-* Django tests
+## How to run this app
+* Download Docker
+* Clone this Repository
+```bash
+cd <this_repo_name>/Container
+```
+```bash
+docker-compose up --build
+```
+* go to http://localhost:3000
 
 ## What's in app?
 [The idea is found in a random blog.](https://blog.bitsrc.io/15-app-ideas-to-build-and-level-up-your-coding-skills-28612c72a3b1)
