@@ -6,7 +6,7 @@ import requests, json
 from django.http import Http404
 
 class RepoViewSet(viewsets.ViewSet):
-    def fetch_and_retrieve(self, request, username):
+    def fetch_and_retrieve(self, request, username, update_existing=False):
         """
         Sends request to Github API and receives
         repo info or Not found message.
@@ -14,7 +14,9 @@ class RepoViewSet(viewsets.ViewSet):
         req = requests.get(f'https://api.github.com/users/{username}/repos')
         if 'message' in req.json():
             raise Http404(req.json()['message'])
-            
+
+        if update_existing:
+            Repo.objects.filter(owner__login__iexact = username).delete()
         for repo in req.json():
             Repo(
                 full_name=repo['full_name'],
@@ -31,8 +33,11 @@ class RepoViewSet(viewsets.ViewSet):
         """
         Retrieves repo info from DB or Github API
         """
+        update_data = request.GET.get('updateData', False)
         queryset = Repo.objects.filter(owner__login__iexact = username) or None
         if queryset:
+            if update_data:
+                __class__.fetch_and_retrieve(self, request, username, update_existing=True)
             serializer = RepoSerializer(queryset, many=True)
             return Response(serializer.data)
         else:

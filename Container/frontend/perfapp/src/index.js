@@ -20,6 +20,20 @@ class MainContainer extends React.Component {
         this.handleInput = this.handleInput.bind(this)
     }
 
+    printResponse(response) {
+        this.setState({ getUpdateButtonText: 'Update Data!', getUpdateButtonFirstInput: false, results: [], emptyResult: false });
+        // Sorting API response by date
+        response['data'] = response['data'].sort((a, b) => (new Date(a['created_at']) > new Date(b['created_at'])) ? 1 : -1);
+        response['data'].forEach(e => {
+            let full_name = e['full_name'].split('/')
+            this.setState({
+                results: this.state.results.concat(
+                    <ResultRepo name={full_name[1]} url={e['html_url']} description={e['description']} createdAt={e['created_at']} />),
+                last_updated: e['last_updated']
+            })
+        });
+    }
+
     handleClick() {
         let username = $('#username').val()
         if (username.trim().length === 0) {
@@ -30,25 +44,16 @@ class MainContainer extends React.Component {
             $('#username').removeClass('border-danger')
             $('.input-error').addClass('opacity-0')
             $('.input-error').text('Error here')
-
-            axios.get(`http://localhost:8000/repos/${username}`)
-                .then(response => {
-                    this.setState({ getUpdateButtonText: 'Update Data!', getUpdateButtonFirstInput: false, results: [], emptyResult: false });
-                    // Sorting API response by date
-                    response['data'] = response['data'].sort((a, b) => (new Date(a['created_at']) > new Date(b['created_at'])) ? 1 : -1);
-                    response['data'].forEach(e => {
-                        let full_name = e['full_name'].split('/')
-                        this.setState({
-                            results: this.state.results.concat(
-                                <ResultRepo name={full_name[1]} url={e['html_url']} description={e['description']} createdAt={e['created_at']} />),
-                            last_updated: e['last_updated']
-                        })
-                    });
-                })
-                .catch(() => {
-                    this.setState({ results: [<EmptyResults text="Wrong username" />], emptyResult: true })
-                })
         }
+        let url = `http://localhost:8000/repos/${username}`
+        if ($('.get-update-btn').text() === 'Update Data!') {
+            url += '?updateData=true'
+        }
+        axios.get(url)
+        .then(response => {this.printResponse(response)})
+        .catch(() => {
+            this.setState({ results: [<EmptyResults text="Wrong username" />], emptyResult: true })
+        })
     }
 
     handleInput() {
