@@ -17,18 +17,20 @@ Example of a perfect web app.
 * Docker: Docker-Compose
 
 ## How to run this app
-* Make Sure to have installed
+1. Make Sure to have installed
 >1. Docker
 >2. Python
 >3. Node JS (for npm)
-* Clone this Repository
+2. Clone this Repository
+3.
 ```bash
 cd <this_repo_name>/Container
 ```
+4.
 ```bash
 docker-compose up --build
 ```
-* go to http://localhost:3000
+5. go to http://localhost:3000
 
 ## What's in app?
 [The idea is found in a random blog.](https://blog.bitsrc.io/15-app-ideas-to-build-and-level-up-your-coding-skills-28612c72a3b1)
