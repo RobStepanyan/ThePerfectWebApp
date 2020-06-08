@@ -30,7 +30,7 @@ cd <this_repo_name>/Container
 ```bash
 docker-compose up --build
 ```
-5. go to http://localhost:3000
+5. Open http://localhost:3000
 
 ## What's in app?
 [The idea is found in a random blog.](https://blog.bitsrc.io/15-app-ideas-to-build-and-level-up-your-coding-skills-28612c72a3b1)
