@@ -22,11 +22,11 @@ Example of a perfect web app.
 >2. Python
 >3. Node JS (for npm)
 2. Clone this Repository
-3.
+3. Go to directory of container
 ```bash
 cd <this_repo_name>/Container
 ```
-4.
+4. Build and run the container
 ```bash
 docker-compose up --build
 ```
